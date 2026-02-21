@@ -1,62 +1,59 @@
 import Image from "next/image";
+import {
+  InstagramIcon,
+  ShopeeIcon,
+  TiktokIcon,
+  TokopediaIcon,
+} from "@/assets/icons";
+import { Link } from "@/libs/utils";
+import { IMAGE, URL } from "@/libs/consts";
 
-function GearIcon({
-  className,
-  size = 24,
-}: {
-  className?: string;
-  size?: number;
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-    </svg>
-  );
-}
+const SOCIAL_LINKS = [
+  { href: URL.TIKTOK, label: "TikTok", Icon: TiktokIcon },
+  { href: URL.INSTAGRAM, label: "Instagram", Icon: InstagramIcon },
+  { href: URL.SHOPEE, label: "Shopee", Icon: ShopeeIcon },
+  { href: URL.TOKOPEDIA, label: "Tokopedia", Icon: TokopediaIcon },
+] as const;
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 font-sans">
-      <main className="flex flex-col items-center gap-16 text-center">
-        <div className="flex h-[200px] w-[200px] items-center justify-center overflow-hidden sm:h-[240px] sm:w-[240px]">
+    <div className="flex min-h-screen flex-col bg-stone-50 font-sans">
+      <main className="flex flex-1 flex-col items-center justify-center px-6 py-16">
+        <div className="mb-12 transition-transform duration-200 hover:scale-105">
           <Image
-            src="https://api.minio.runeforge.tech/crmax-assets/crmax-logo.jpeg"
+            src={IMAGE.CRMAX_LOGO}
             alt="CRMax"
-            width={200}
-            height={200}
-            className="scale-125 object-contain"
+            width={180}
+            height={180}
             priority
           />
         </div>
 
-        <div className="flex flex-col items-center gap-2">
-          <h1 className="text-xl font-medium tracking-tight text-zinc-800 sm:text-2xl">
+        <div className="w-full max-w-md text-center">
+          <h1 className="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
             Coming soon
           </h1>
-          <p className="max-w-xs text-sm text-zinc-500">
-            We’re working on something. Check back later.
+          <div className="mx-auto mt-2 h-0.5 w-12 rounded-full bg-[#F86800]" />
+          <p className="mt-3 font-semibold leading-relaxed text-stone-600 sm:text-lg">
+            We{"'"}re building something new. Follow us on social media.
           </p>
-        </div>
 
-        <div className="flex items-center justify-center gap-1">
-          <span className="animate-gear-spin-slow text-[#F86800]">
-            <GearIcon size={44} />
-          </span>
-          <span className="-ml-2 animate-gear-spin-reverse text-zinc-400">
-            <GearIcon size={28} />
-          </span>
+          <div className="mt-10">
+            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-stone-500">
+              Our social media
+            </p>
+            <ul className="flex flex-wrap items-center justify-center gap-6">
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <li key={label}>
+                  <span className="inline-flex rounded-full p-2 transition-colors duration-200 hover:bg-stone-200/70">
+                    <Link href={href} label={label}>
+                      <Icon size={24} />
+                    </Link>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </main>
     </div>
