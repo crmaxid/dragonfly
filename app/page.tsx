@@ -6,7 +6,7 @@ import {
   TokopediaIcon,
 } from "@/assets/icons";
 import { Link } from "@/libs/utils";
-import { IMAGE, URL } from "@/libs/consts";
+import { BRAND, IMAGE, SEO, URL } from "@/libs/consts";
 
 const SOCIAL_LINKS = [
   { href: URL.TIKTOK, label: "TikTok", Icon: TiktokIcon },
@@ -22,7 +22,7 @@ export default function Home() {
         <div className="mb-12 transition-transform duration-200 hover:scale-105">
           <Image
             src={IMAGE.CRMAX_LOGO}
-            alt="CRMax"
+            alt={`${BRAND.NAME} logo`}
             width={180}
             height={180}
             priority
@@ -31,7 +31,7 @@ export default function Home() {
 
         <div className="w-full max-w-md text-center">
           <h1 className="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
-            Coming soon
+            {SEO.DEFAULT_TITLE}
           </h1>
           <div className="mx-auto mt-2 h-0.5 w-12 rounded-full bg-[#F86800]" />
           <p className="mt-3 font-semibold leading-relaxed text-stone-600 sm:text-lg">
